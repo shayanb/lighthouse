@@ -66,6 +66,9 @@ impl GraffitiFile {
 
         for line in lines {
             let line = line.map_err(|e| Error::InvalidLine(e.to_string()))?;
+            if line.trim().is_empty() {
+                continue;
+            }
             let (pk_opt, graffiti) = read_line(&line)?;
             match pk_opt {
                 Some(pk) => {
