@@ -1065,7 +1065,6 @@ impl InitializedValidators {
         {
             val.gas_limit = Some(gas_limit);
         }
-
         self.definitions
             .save(&self.validators_dir)
             .map_err(Error::UnableToSaveDefinitions)?;
@@ -1285,6 +1284,7 @@ impl InitializedValidators {
                                     "Enabled validator";
                                     "signing_method" => "local_keystore",
                                     "voting_pubkey" => format!("{:?}", def.voting_public_key),
+                                    "graffiti" => format!("{:?}", def.graffiti)
                                 );
 
                                 if let Some(lockfile_path) = existing_lockfile_path {
@@ -1304,7 +1304,8 @@ impl InitializedValidators {
                                     "Failed to initialize validator";
                                     "error" => format!("{:?}", e),
                                     "signing_method" => "local_keystore",
-                                    "validator" => format!("{:?}", def.voting_public_key)
+                                    "validator" => format!("{:?}", def.voting_public_key),
+                                    "graffiti" => format!("{:?}", def.graffiti)
                                 );
 
                                 // Exit on an invalid validator.
@@ -1331,6 +1332,7 @@ impl InitializedValidators {
                                     "Enabled validator";
                                     "signing_method" => "remote_signer",
                                     "voting_pubkey" => format!("{:?}", def.voting_public_key),
+                                    "graffiti" => format!("{:?}", def.graffiti)
                                 );
                             }
                             Err(e) => {
@@ -1339,7 +1341,8 @@ impl InitializedValidators {
                                     "Failed to initialize validator";
                                     "error" => format!("{:?}", e),
                                     "signing_method" => "remote_signer",
-                                    "validator" => format!("{:?}", def.voting_public_key)
+                                    "validator" => format!("{:?}", def.voting_public_key),
+                                    "graffiti" => format!("{:?}", def.graffiti)
                                 );
 
                                 // Exit on an invalid validator.
